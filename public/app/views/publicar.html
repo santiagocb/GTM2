@@ -1,0 +1,50 @@
+
+<script>
+  $(document).ready(function() {
+    $('select').material_select();
+  });
+</script>
+<div class="" align="left">
+  <h3>Publicar</h3>
+  <form method="post" enctype="multipart/form-data" ng-submit="crearPublicacion()">
+    <div class="row">
+      <div class="col s3">
+        <input type="text" ng-model="publicacion.nombre_producto" placeholder="Nombre del producto" name="nombre" required="" />
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s3">
+        <select ng-model="publicacion.categoria" >
+        <option value="" disabled selected>Elige una categoría</option>
+        <option value="Masculino">Ropa y Accesosrios</option>
+        <option value="Femenino">Deportes</option>
+        <option value="Indefinido">Hogar</option>
+        <option value="Indefinido">Tecnología</option>
+        <option value="Indefinido">Libros</option>
+        <option value="Indefinido">Otros</option>
+      </select>
+        <label>Categoría</label>
+      </div>
+    </div>
+    <!--
+    <div class="row">
+<<<<<<< HEAD
+      <file name="imagen" ng-model="publicacion.imagen" accept="image/png,image/jpg,image/jpeg">
+=======
+      <input type="file" uploader-model="publicacion.imagen" name="imagen">
+>>>>>>> 573adcbdd2dccfe9eed1b33bf5894b5c34837b0b
+    </div>
+  -->
+    <div class="row">
+      <div class="col s3">
+        <input type="text" ng-model="publicacion.descripcion" placeholder="Descripción del producto" name="Descripcion" required="" />
+      </div>
+    </div>
+    <button class="btn waves-effect waves-light teal" type="submit" name="action" value="Publicar">Publicar
+            <i class="material-icons right">send</i>
+        </button>
+        <div class="row">
+
+        </div>
+  </form>
+</div>

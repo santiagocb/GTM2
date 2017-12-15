@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html ng-app="app">
+
+<head>
+	<meta charset="utf-8">
+	<title>GTM²</title>
+	<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<!--Import materialize.css-->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
+	<script src="https://code.jquery.com/jquery-2.1.1.js" integrity="sha256-FA/0OOqu3gRvHOuidXnRbcmAWVcJORhz+pv3TX2+U6w=" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>	
+
+</head>
+
+<body>
+	<div class="container">
+		<h1>Hola este es el index padre</h1>
+		<div ui-view>
+
+		</div>
+		<footer name="footer" class="page-footer">
+			<div class="container">
+				<div class="row">
+					<div class="col l6 s12">
+						<h5 class="white-text">Developed by:</h5>
+						<li>Juan Fernando Giraldo</li>
+						<li>Andrés Ruiz Graciano</li>
+						<li>Sergio Andrés Castrillón Vásquez</li>
+						<li>Jerónimo Alzate Duque</li>
+						<li>Santiago Cadavid Bustamante</li>
+						<li>Nicolás Alberto Henao Avendaño</li>
+					</div>
+				</div>
+			</div>
+			<div class="footer-copyright">
+				<div class="container">
+					©© 2017 Hippie Team
+				</div>
+			</div>
+		</footer>
+
+		<!-- Third-party Libraries -->
+		<script src="/node_modules/angular/angular.js" charset="utf-8"></script>
+		<script src="/node_modules/angular-ui-router/release/angular-ui-router.js" charset="utf-8"></script>
+		<script src="/node_modules/satellizer/dist/satellizer.min.js" charset="utf-8"></script>
+		<script src="/node_modules/toastr/toastr.js" charset="utf-8"></script>
+		<!-- <script src="/node_modules/ng-file-upload/ng-file-upload-shim.min.js"></script>
+		<script src="/node_modules/ng-file-upload/ng-file-upload-shim.js"></script>
+		<script src="/node_modules/ng-file-upload/ng-file-upload.min.js"></script>
+		<script src="/node_modules/ng-file-upload/ng-file-upload.js"></script> -->
+
+		<!-- Código de la App -->
+		<script src="/public/app/app.module.js" charset="utf-8"></script>
+		<script src="/public/app/app.services.js" charset="utf-8"></script>
+		<script src="/public/app/controller/homelog.controller.js" charset="utf-8"></script>
+		<script src="/public/app/controller/logueo.controller.js" charset="utf-8"></script>
+		<script src="/public/app/controller/signup.controller.js" charset="utf-8"></script>
+		<script src="/public/app/controller/modificarPerfil.controller.js" charset="utf-8"></script>
+		<script src="/public/app/controller/publicar.controller.js" charset="utf-8"></script>
+
+	</div>
+</body>
+
+</html>

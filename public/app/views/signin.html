@@ -1,0 +1,44 @@
+<div class="container" align="center">
+  <h1> Ingresar</h1>
+  <form ng-submit="login()" id="login" method="post">
+    <div class ="row">
+      <div class ="col s3 offset-s1"><span class ="flow text">
+      </div>
+      <div class ="col s4">
+        <input type="text" ng-model="user.usuario" placeholder="Usuario" name="usuario" required ng-required="false"/>
+      </div>
+    </div>
+    <div class="row">
+      <div class ="col s3 offset-s1"><span class ="flow text">
+      </div>
+      <div class ="col s4">
+        <input type="password" ng-model="user.contrasena" placeholder="Contraseña" name="password" required ng-required="false"/>
+      </div>
+    </div>
+    <div class="break"></div>
+    <div class="row"></div>
+    <div class="row">
+      <button class="btn waves-effect waves-light teal" type="submit" name="action" value="Ingresar">INGRESAR
+          <i class="material-icons right">send</i>
+      </button>
+    </div>
+  </form>
+</div>
+
+<!-- <script type="text/javascript">
+  const formLogin = document.querySelector('#login')
+  const formData = new FormData(formLogin)
+
+  formLogin.addEventListener('submit', event => {
+    event.preventDefault()
+    fetch('/gtm/signin', {
+      method: 'POST',
+      body: formData
+    })
+    .then(res => res.json())
+    .then(data => {
+      localStorage.setItem('token', data.token)
+    })
+  })
+</script>
+-->

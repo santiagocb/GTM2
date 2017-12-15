@@ -1,0 +1,30 @@
+<div id="header-wrap">
+  <header id="header">
+    <div class="row no-margin" id="nav-desktop">
+      <div class="col s12 m12 l12">
+        <nav class="" style="background-color: #cc9900">
+          <div class="nav-wrapper">
+            <a ui-sref="homelog" class="brand-logo btn-flat big-btn">GTM²</a>
+            <div class="user-links right">
+              <div class=""  ng-controller="logueoController as login">
+                <span class="login-link"><a ui-sref="homelog.perfil"
+                      class="waves-effect btn-flat big-btn dialog-trigger">Bienvenido a GTM²</a></span>
+                      <span class="login-link"><a ui-sref="homelog.publicar"
+                      class="waves-effect btn-flat big-btn dialog-trigger">Publicar</a></span>
+                      <span class="login-link"><a ui-sref="/"
+                      class="waves-effect btn-flat big-btn dialog-trigger" ng-click=salir()>Salir</a></span>
+              </div>
+              <!--
+              <span class="login-link"><a ui-sref="/"
+              class="waves-effect btn-flat big-btn dialog-trigger" ng-click=nombreUsuario()>Prueba</a></span>
+            -->
+            </div>
+          </div>
+        </nav>
+      </div>
+    </div>
+  </header>
+</div>
+<div ui-view> <!-- Acá es donde se cargan las vistas que se piden por medio de SPA-->
+
+</div>

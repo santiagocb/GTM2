@@ -1,0 +1,59 @@
+<nav>
+  <div name="header" class="nav-wrapper">
+    <div class="container">
+      <a class="brand-logo">GTM</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="../signup">Registrarme</a></li>
+        <li><a href="../login">Iniciar sesión</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div align="center">
+  <h1> Crea una publicación</h1>
+  <form id="login" method="post">
+    <div class ="row">
+      <div class ="col s6 offset-s3">
+        <label for="fecha_caducado">Fecha de caducidad</label>
+        <input id="fecha_caducado" name="fecha_caducado" type="date" class="datepicker">
+      </div>
+    </div>
+    <div class ="row">
+      <div class ="col s6 offset-s3">
+        <input type="text" placeholder="Descripcion" name="descripcion" required=""/>
+      </div>
+    </div>
+    <div class ="row">
+      <div class ="col s6 offset-s3">
+        <input type="text" placeholder="Nombre" name="nombre" required=""/>
+      </div>
+      <div class="input-field col s6 offset-s3">
+        <select name="categoria" required="">
+          <option value="" disabled selected>Elige una opción</option>
+          <option value="Tecnologia">Tecnologia</option>
+          <option value="Aire Libre">Aire Libre</option>
+          <option value="Ropa">Ropa</option>
+          <option value="Deportes">Deportes</option>
+          <option value="Hogar">Hogar</option>
+          <option value="Juguetes">Juguetes</option>
+          <option value="Libros">Libros</option>
+          <option value="Otro">Otro</option>
+        </select>
+        <label>Categoría</label>
+      </div>
+    </div>
+    <div class ="row">
+      <div class ="col s6 offset-s3">
+        <input type="text" placeholder="Nombre" name="nombre" required=""/>
+      </div>
+    </div>
+    <div class="break"></div>
+    <div class="row"></div>
+    <div class="row">
+      <button class="btn waves-effect waves-light teal" type="submit" name="action" value="Ingresar">INGRESAR
+          <i class="material-icons right">send</i>
+      </button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,54 @@
+<div class="container" align="center">
+  <h1> Registrarme</h1>
+  <form ng-submit="registrarse()" id="registrarse" method="post">
+    <div class="row">
+      <div class="col s6 offset-s3">
+        <input type="email" ng-model="user.correo" placeholder="Correo" name="correo" required ng-required="false" />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col s6 offset-s3">
+        <input type="text" ng-model="user.nombre" placeholder="Nombres y Apellidos" name="nombre" required ng-required="false" />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col s6 offset-s3">
+        <input type="text" ng-model="user.usuario" placeholder="Nombre de usuario" name="usuario" required ng-required="false" />
+      </div>
+    </div>
+    <div ng-app='contra'>
+      <div class="row">
+        <div class="col s6 offset-s3">
+          <input type="password" ng-model="user.contrasena" placeholder="Contraseña" name="contrasena" required ng-required="false" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s6 offset-s3">
+          <input type="password" ng-model="user.contrasena1" placeholder="Repita Contraseña" name="contrasena1" required ng-required="false" />
+        </div>
+      </div>
+    </div>
+    <div class="break"></div>
+    <div class="row"></div>
+    <div class="row">
+      <button class="btn waves-effect waves-light teal" type="submit" name="action" value="Ingresar">REGISTRARME
+          <i class="material-icons right">send</i>
+      </button>
+    </div>
+  </form>
+</div>
+<!--
+<script type="text/javascript">
+  const formLogin = document.querySelector('#signup')
+  const formData = new FormData(formLogin)
+
+  formLogin.addEventListener('submit', event => {
+    event.preventDefault()
+    fetch('/gtm/signup', {
+      method: 'POST',
+      body: formData
+    })
+    .then(res => res.json())
+  })
+</script>
+-->

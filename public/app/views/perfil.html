@@ -1,0 +1,52 @@
+<script>
+  $(document).ready(function() {
+    $('select').material_select();
+  });
+</script>
+<div class="" align="left">
+  <h3>Username</h3>
+  <h4>Editar mi perfil</h4>
+  <label class="control-label">Profile Picture</label>
+  <form method="post" ng-submit="modificarPerfil()">
+    <div class="row">
+      <div class="col s4">
+        <img class="profile-picture" ng-src="{{user.picture || 'https://gravatar.com/avatar/?s=200&d=retro'}}">
+          <div align="center">
+            <a class="waves-effect waves-teal btn-flat"><i class="material-icons right">add_a_photo</i></a>
+          </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s3">
+        <select ng-model="perfil.genero">
+        <option value="" disabled selected>Elige una opción</option>
+        <option value="Masculino">Masculino</option>
+        <option value="Femenino">Femenino</option>
+        <option value="Indefinido">Indefinido</option>
+      </select>
+        <label>Género</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col s3">
+        <input type="text" ng-model ="perfil.direccion" placeholder="Direccion" name="direccion" required="" />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col s3">
+        <input type="text" ng-model="pefil.telefono" pattern="[\d]{7,10}" title="Ingrese un número telefónico válido" placeholder="Telefono" name="telefono" required="" />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col s3">
+        <input type="text" ng-model="perfil.pais" placeholder="Pais" name="pais" required="" />
+      </div>
+    </div>
+    <button class="btn waves-effect waves-light teal" type="submit" name="action" value="Ingresar">Actualizar
+            <i class="material-icons right">mode_edit</i>
+        </button>
+        <div class="row">
+
+        </div>
+  </form>
+</div>
