@@ -28,7 +28,7 @@ function signIn(req, res){
 						success: true,
 						message: 'Signed in correctly',
 						token: token,
-						name: user.user
+						name: user.name
 				})
 			}
 			else { return res.status(422).send({message: `The password does not match`}) }

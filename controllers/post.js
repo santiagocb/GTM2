@@ -4,23 +4,7 @@ const REQUEST = require('../models/request')
 const FS = require('fs')
 
 function createPost (req, res){
-	/*console.log(req);
-	console.log(req.imagen)
-	console.log(req.headers['content-type'])
-	let imagenFile = req.files.imagen
-	console.log(imagenFile)
-	if (imagenFile == undefined){
-		return res.status(400).send('No se encontró ningún archivo')
-	}
-	else{
-		var nombreImagen = imagenFile.name
-		let pathPublicacion = './src/publicacion/'
-		// Use the mv() method to place the file somewhere on your server
-		imagen.mv(pathPublicacion + nombreImagen, function(err) {
-			if (err)	return res.status(500).send({message: `Error al procesar la imagen: ${err}`})
-		})
-	}*/
-	console.log(req.files);
+	//console.log(req.files);
 	var post = new POST
 		post.description = req.body.descripcion
 		post.productName = req.body.nombre_producto

@@ -8,30 +8,30 @@ var userController = require('../controllers/user')
 var requestController = require('../controllers/request')
 
 //endpoint generar publicacion
-GTM.post('/publicacion', AUTH, postController.createPost)
+GTM.post('/post', AUTH, postController.createPost)
 //endpoint enviar todas las publicaciones
-GTM.get('/publicacion', AUTH, postController.getAllPosts)
+GTM.get('/', AUTH, postController.getAllPosts)
 //enpoint para ver todas las publicaciones del usuario en sesion
-GTM.get('/misPublicaciones', AUTH, postController.getMyPosts)
+GTM.get('/myposts', AUTH, postController.getMyPosts)
 //endpoint para las publicaciones hechas por el usuario
-GTM.get('/publicacion/:id', AUTH, postController.getPost)
+GTM.get('/post/:id', AUTH, postController.getPost)
 //endpoint eliminar publicacion
-GTM.delete('/publicacion/:publicacionid', AUTH, postController.deletePost)
+GTM.delete('/post/:postid', AUTH, postController.deletePost)
 //endpoint actualizar publicacion
 
 
-//endpoint para un usuario
-GTM.post('/signUp', userController.signUp)
+//endpoint para registrar un usuario
+GTM.post('/signup', userController.signUp)
 //endpoint para login
-GTM.post('/signIn', userController.signIn)
+GTM.post('/signin', userController.signIn)
 //endpoint para modificar perfil
-GTM.put('/perfil', AUTH, userController.updateUser)
+GTM.put('/profile', AUTH, userController.updateUser)
 
 
 //endpoint para solicitud
-GTM.post('/publicacion/:id', AUTH, requestController.createRequest)
+GTM.post('/post/:id', AUTH, requestController.createRequest)
 //borrar solicitud
-GTM.delete('/solicitud/:id', AUTH, requestController.deleteRequest)
+GTM.delete('/request/:id', AUTH, requestController.deleteRequest)
 
 
 module.exports = GTM
