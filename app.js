@@ -6,11 +6,13 @@ const APP = EXPRESS();
 const CORS = require('cors');
 const GTM = require('./routes')
 const MORGAN = require('morgan')
+const MULTIPART = require('connect-multiparty')
 
 APP.use(CORS())
 APP.use(MORGAN('dev'))
 APP.use('/public', EXPRESS.static(__dirname + '/public'));
 APP.use('/node_modules', EXPRESS.static(__dirname + '/node_modules'));
+APP.use(MULTIPART())
 APP.get('/',function (req,res) {
    return res.sendfile('./public/index.html') //Página de inicio por defecto.
 })

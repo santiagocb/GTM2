@@ -1,6 +1,7 @@
 
 const POST = require('../models/post')
 const REQUEST = require('../models/request')
+const FS = require('fs')
 
 function createPost (req, res){
 	/*console.log(req);
@@ -19,14 +20,15 @@ function createPost (req, res){
 			if (err)	return res.status(500).send({message: `Error al procesar la imagen: ${err}`})
 		})
 	}*/
+	console.log(req.files);
+	var post = new POST
+		post.description = req.body.descripcion
+		post.productName = req.body.nombre_producto
+		post.type = req.body.categoria
+		post.publisher = req.user
+		post.image.data = FS.readFileSync(req.files.imagen.path)
+		post.image.contentType = req.files.imagen.type
 
-	var post = new POST({
-		description: req.body.descripcion,
-		productName: req.body.nombre_producto,
-		type: req.body.categoria,
-		publisher: req.user,
-		//imagen: nombreImagen
-	})
 	post.save((err, postStored) => {
 		if (err) res.status(500).send({message: `Error generation the post: ${err}`})
 		res.status(201).send({ post: postStored})

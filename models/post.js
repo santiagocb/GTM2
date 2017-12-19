@@ -5,7 +5,7 @@ const SCHEMA = MOONGOSE.Schema
 var postSchema = new SCHEMA({
 	description: {type: String},
 	productName: {type: String},
-	//imagen: {data: String},
+	image: {data: Buffer, contentType: String},
 	type: {type: String},
 	publisher: {type: String},
 	request: {type: Number, default: 0},
