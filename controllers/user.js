@@ -2,6 +2,7 @@
 const USER = require('../models/user')
 const SERVICE = require	('../services')
 const BCRYPT = require('bcrypt-nodejs')
+const FS = require('fs')
 
 function signUp(req, res){
 		var user = new USER({
@@ -37,12 +38,22 @@ function signIn(req, res){
 }
 
 function updateUser(req, res){
-	let current = req.body
-	//console.log(SERVICE.decodeToken(token)) //no se hace uso del decode acá porque ya esta en req.user
+	let current = {
+		name: req.body.nombre,
+		address: req.body.direccion,
+		phone: req.body.telefono,
+		country: req.body.pais,
+		gender: req.body.genero,
+		password: req.body.contrasena,
+		image: {
+			data: FS.readFileSync(req.files.imagen.path),
+			contentType: req.files.imagen.type
+		}
+	}
 	let idUser = req.user
 	USER.findByIdAndUpdate(idUser, current, (err, userUpdated) => {
 		if(err) res.status(500).send({message: `Error updating the user information: ${err}`})
-		res.status(200).send({userUpdated})
+		res.status(200).send({message: 'User information updated successfully'})
 	})
 }
 

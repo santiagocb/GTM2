@@ -7,7 +7,6 @@ const CRYPTO = require('crypto') //A partir de el email me crea un avatar
 var userSchema = new SCHEMA({
 	email: {type: String, unique: true, lowercase: true},
 	name: {type: String},
-	avatar: {type: String}, //Se guarda la URL donde es guardada la imagen
 	address: {type: String, default: ''},
 	phone: {type: String, default: ''},
 	country: {type: String, default: ''},
@@ -15,7 +14,8 @@ var userSchema = new SCHEMA({
 	user: {type: String, unique: true, lowercase: true},
 	password: {type: String},
 	registerDate: {type: Date, default: Date.now()},
-	lastLogin: Date
+	image: {data: Buffer, contentType: String},
+	lastLogin: Date			//Aún no implementado
 })
 
 userSchema.pre('save', function(next){ //Algoritmo para codificar la contraseña antes de ser guardada
@@ -35,13 +35,6 @@ userSchema.pre('save', function(next){ //Algoritmo para codificar la contraseña
 userSchema.statics.findOneByEmail = function(email, callback){
     this.findOne({email: new RegExp(email, 'i')}, callback);
 };
-
-userSchema.methods.gravatar = function(){ //A partir de un email nos devuelve un avatar por defecto, si no está registrado
-	if(!this.email)
-		return `https://gravatar.com/avatar/?s=200&d=retro`
-	const md5 = CRYPTO.createHash('md5').update(this.email).digest('hex') //En caso de que ya esté registrado en gravatar
-	return `https://gravatar.com/avatar/${md5}?s=200&d=retro`
-}
 
 
 module.exports = MONGOOSE.model('User', userSchema)
