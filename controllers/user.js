@@ -22,10 +22,12 @@ function signUp(req, res){
 }
 
 function signIn(req, res){
-	USER.findOneByEmail(req.body.correo, (err, user) => {
+	USER.findOneEmailOrUser(req.body.id, req.body.id, (err, user) => {
 		if(err) return res.status(500).send({message: err})
-		if(!user) return res.status(404).send({message: `The user does not exist`})
-		BCRYPT.compare(req.body.contrasena, user.password, (err, result) => {
+		if(user.length == 0) return res.status(404).send({message: `The user does not exist`})
+		BCRYPT.compare(req.body.contrasena, user[0].password, (err, result) => {
+			console.log(result);
+			
 				if(result)	{
 					var token = SERVICE.createToken(user)
 					res.status(200).send({
@@ -35,7 +37,9 @@ function signIn(req, res){
 						name: user.name
 				})
 			}
-			else { return res.status(422).send({message: `The password does not match`}) }
+			else { 
+				return res.status(422).send({message: `The password does not match`}) 
+			}
 		})
 	})
 }
