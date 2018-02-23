@@ -25,16 +25,14 @@ function signIn(req, res){
 	USER.findOneEmailOrUser(req.body.id, req.body.id, (err, user) => {
 		if(err) return res.status(500).send({message: err})
 		if(user.length == 0) return res.status(404).send({message: `The user does not exist`})
-		BCRYPT.compare(req.body.contrasena, user[0].password, (err, result) => {
-			console.log(result);
-			
+		BCRYPT.compare(req.body.contrasena, user[0].password, (err, result) => {			
 				if(result)	{
-					var token = SERVICE.createToken(user)
+					var token = SERVICE.createToken(user[0])
 					res.status(200).send({
 						success: true,
 						message: 'Signed in correctly',
 						token: token,
-						name: user.name
+						name: user[0].name
 				})
 			}
 			else { 
@@ -57,9 +55,9 @@ function updateUser(req, res){
 			contentType: req.files.imagen.type
 		}
 	}
-	let idUser = req.user
-	USER.findByIdAndUpdate(idUser, current, (err, userUpdated) => {
-		if(err) res.status(500).send({message: `Error updating the user information: ${err}`})
+	let idUser = req.user	
+	USER.findByIdAndUpdate(idUser, current, (err, userUpdated) => {		
+		if(err) res.status(500).send({message: `Error updating the user information`})
 		res.status(200).send({message: 'User information updated successfully'})
 	})
 }
