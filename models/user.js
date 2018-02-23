@@ -4,6 +4,14 @@ const SCHEMA = MONGOOSE.Schema
 const BCRYPT = require('bcrypt-nodejs') //Libreria para encriptar la contraseña
 const CRYPTO = require('crypto') //A partir de el email me crea un avatar
 
+var url = "mongodb://system:gtmroot@ds245518.mlab.com:45518/gtmdb"
+
+var moon = MONGOOSE.connect(url)
+
+function close() {
+  moon.close()
+}
+
 var userSchema = new SCHEMA({
 	email: {type: String, unique: true, lowercase: true},
 	name: {type: String},

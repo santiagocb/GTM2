@@ -1,6 +1,14 @@
 
-const MOONGOSE = require('mongoose')
-const SCHEMA = MOONGOSE.Schema
+const MONGOOSE = require('mongoose')
+const SCHEMA = MONGOOSE.Schema
+
+var url = "mongodb://system:gtmroot@ds245518.mlab.com:45518/gtmdb"
+
+var moon = MONGOOSE.connect(url)
+
+function close() {
+  moon.close()
+}
 
 var postSchema = new SCHEMA({
 	description: {type: String},
@@ -17,4 +25,4 @@ postSchema.statics.findByPublisher = function(publisher, callback){
     this.find({publisher: new RegExp(publisher, 'i')}, callback);
 };
 
-module.exports = MOONGOSE.model('Post', postSchema)
+module.exports = MONGOOSE.model('Post', postSchema)

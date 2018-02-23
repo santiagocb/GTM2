@@ -2,6 +2,14 @@
 const MONGOOSE = require('mongoose')
 const SCHEMA = MONGOOSE.Schema
 
+var url = "mongodb://system:gtmroot@ds245518.mlab.com:45518/gtmdb"
+
+var moon = MONGOOSE.connect(url)
+
+function close() {
+  moon.close()
+}
+
 var requestSchema = new SCHEMA({
 	postCode: {type: String},
 	requester: {type: String}

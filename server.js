@@ -4,7 +4,11 @@ const APP = require('./app')
 const CONFIG = require('./config')
 // "npm start" para iniciar el server
 
-MONGOOSE.connect(CONFIG.db, (err, res) => {
+APP.listen(CONFIG.port, () => {
+	console.log(`API Rest corriendo en http://localhost:${CONFIG.port}`);
+})
+
+/*MONGOOSE.connect(CONFIG.db, (err, res) => {
 	if(err){
 		return console.log(`Error al conectar a la base de datos: ${err}`)
 	}
@@ -12,4 +16,4 @@ MONGOOSE.connect(CONFIG.db, (err, res) => {
 	APP.listen(CONFIG.port, () => {
 	console.log(`API Rest corriendo en http://localhost:${CONFIG.port}`);
 	})
-})
+})*/
