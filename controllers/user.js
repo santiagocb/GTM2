@@ -12,10 +12,13 @@ function signUp(req, res){
 		password: req.body.contrasena
 	})
 	//console.log(req.body); //Mostrar mediante consola lo que se que está enviando por parámetro en el middleware
-	user.save((err) => {
-		if (err) res.status(500).send({message: `Error creating the user: ${err}`})
-		return res.status(201).send({message: 'The user has been signed up successfully'})
- 	})
+	USER.findOneEmailOrUser(user.email, user.user, (err, foundUser) => {
+		if(foundUser.length != 0) return res.status(409).send({message: 'Error creating the user: The unique field has already taken'})
+		user.save((err) => {
+			if (err) res.status(500).send({message: `Error creating the user: ${err}`})
+			return res.status(201).send({message: 'The user has been signed up successfully'})
+	 	})
+	})
 }
 
 function signIn(req, res){

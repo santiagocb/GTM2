@@ -40,9 +40,9 @@ userSchema.pre('save', function(next){ //Algoritmo para codificar la contraseña
 	})
 })
 
-userSchema.statics.findOneByEmail = function(email, callback){
-    this.findOne({email: new RegExp(email, 'i')}, callback);
-};
+userSchema.statics.findOneEmailOrUser = function(email, user, callback) {
+	this.find({$or:[{email: email}, {user: user}]}, callback)
+}
 
 
 module.exports = MONGOOSE.model('User', userSchema)
