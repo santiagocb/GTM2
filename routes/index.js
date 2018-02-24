@@ -7,16 +7,17 @@ var postController = require('../controllers/post')
 var userController = require('../controllers/user')
 var requestController = require('../controllers/request')
 
+//SE QUITA EL AUTH EN TODOS PARA PROBAR
 //endpoint generar publicacion
 GTM.post('/post', AUTH, postController.createPost)
 //endpoint enviar todas las publicaciones
-GTM.get('/', AUTH, postController.getAllPosts)
+GTM.get('/', postController.getAllPosts)
 //enpoint para ver todas las publicaciones del usuario en sesion
-GTM.get('/myposts', AUTH, postController.getMyPosts)
+GTM.get('/myposts', postController.getMyPosts)
 //endpoint para las publicaciones hechas por el usuario
-GTM.get('/post/:id', AUTH, postController.getPost)
+GTM.get('/post/:id', postController.getPost)
 //endpoint eliminar publicacion
-GTM.delete('/post/:postid', AUTH, postController.deletePost)
+GTM.delete('/post/:postid', postController.deletePost)
 //endpoint actualizar publicacion
 
 
