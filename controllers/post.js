@@ -1,6 +1,7 @@
 
 const POST = require('../models/post')
 const REQUEST = require('../models/request')
+const USER = require('../models/user')
 const FS = require('fs')
 
 function createPost (req, res){
@@ -14,27 +15,39 @@ function createPost (req, res){
 		post.image.contentType = req.files.imagen.type
 
 	post.save((err, postStored) => {
-		if (err) res.status(500).send({message: `Error generation the post: ${err}`})
-		res.status(201).send({ post: postStored})
+		if (err) res.status(500).send({message: `Error generating the post`})
+		res.status(201).send({message:'Post created successfully'})
  	})
 }
 
-function getAllPosts (req, res){
-	POST.find({}).sort({date: 'asc'}).exec(function(err, posts) {
+function getAllPosts (req, res){		//Es una solución no óptima
+	POST.find({}).sort({publicationDate: 'asc'}).exec(function(err, posts) {
 		var publish = posts
+		var index = 0;
+		var numberProcessed = publish.length * 2
 		if(err) return res.status(500).send({message: `Error executing the request: ${err}`})
 		if(!publish.length) return res.status(404).send({message: 'There are not posts'})
 
-		for(i = 0; i < publish.length - 1; i++){
-				let id = publish[i]._id
-				REQUEST.findByPost(id, function(err, request) {
-					if(err) return res.status(500).send({message: `Error executing the request: ${err}`})
-					publish[i].request = request.length
-				})
-				//console.log(publish[i])
-	  }
-		res.status(200).send(publish)
-	})
+		publish.forEach((element) => {
+			let id = element._id	
+			REQUEST.findByPost(id, function(err, requestArray) {
+				if(err) return res.status(500).send({message: `Error executing the request: ${err}`})							
+				element.request = requestArray.length		
+				index++;		
+			})
+			let idPublisher = element.publisher	
+			USER.findById(idPublisher, function(err, poster) {
+				if(err) return res.status(500).send({message: `Error executing the request: ${err}`})				
+				element.publisher = poster.user
+				index++;
+				if(index === numberProcessed){
+					res.status(200).send(publish)
+				}		
+				//console.log({poster: poster.name, pub: element.publisher});
+			})
+
+		})		
+	})	
 }
 
 function getMyPosts (req, res){

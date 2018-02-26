@@ -40,7 +40,7 @@ userSchema.pre('save', function(next){ //Algoritmo para codificar la contraseña
 	})
 })
 
-userSchema.statics.findOneEmailOrUser = function(email, user, callback) {
+userSchema.statics.findOneByEmailOrUser = function(email, user, callback) {
 	this.find({$or:[{email: email}, {user: user}]}, callback)
 }
 

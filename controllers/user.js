@@ -12,7 +12,7 @@ function signUp(req, res){
 		password: req.body.contrasena
 	})
 	//console.log(req.body); //Mostrar mediante consola lo que se que está enviando por parámetro en el middleware
-	USER.findOneEmailOrUser(user.email, user.user, (err, foundUser) => {
+	USER.findOneByEmailOrUser(user.email, user.user, (err, foundUser) => {
 		if(foundUser.length != 0) return res.status(409).send({message: 'Error creating the user: The unique field has already taken'})
 		user.save((err) => {
 			if (err) res.status(500).send({message: `Error creating the user: ${err}`})
@@ -22,7 +22,7 @@ function signUp(req, res){
 }
 
 function signIn(req, res){
-	USER.findOneEmailOrUser(req.body.id, req.body.id, (err, user) => {
+	USER.findOneByEmailOrUser(req.body.id, req.body.id, (err, user) => {
 		if(err) return res.status(500).send({message: err})
 		if(user.length == 0) return res.status(404).send({message: `The user does not exist`})
 		BCRYPT.compare(req.body.contrasena, user[0].password, (err, result) => {			
@@ -49,7 +49,7 @@ function updateUser(req, res){
 		phone: req.body.telefono,
 		country: req.body.pais,
 		gender: req.body.genero,
-		password: req.body.contrasena,
+		//password: req.body.contrasena,
 		image: {
 			data: FS.readFileSync(req.files.imagen.path),
 			contentType: req.files.imagen.type
@@ -61,7 +61,6 @@ function updateUser(req, res){
 		res.status(200).send({message: 'User information updated successfully'})
 	})
 }
-
 
 module.exports = {
 	signUp,
