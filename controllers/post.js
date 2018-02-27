@@ -6,12 +6,12 @@ const FS = require('fs')
 
 function createPost (req, res){
 	var post = new POST
-		post.description = req.body.descripcion
-		post.productName = req.body.nombre_producto
-		post.type = req.body.categoria
+		post.description = req.body.description
+		post.productName = req.body.productName
+		post.type = req.body.type
 		post.publisher = req.user
-		post.image.data = FS.readFileSync(req.files.imagen.path)
-		post.image.contentType = req.files.imagen.type
+		post.image.data = FS.readFileSync(req.files.image.path)
+		post.image.contentType = req.files.image.type
 
 	post.save((err, postStored) => {
 		if (err) res.status(500).send({message: `Error generating the post`})

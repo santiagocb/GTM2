@@ -6,10 +6,10 @@ const FS = require('fs')
 
 function signUp(req, res){
 		var user = new USER({
-		email: req.body.correo,
-		name: req.body.nombre,
-		user: req.body.usuario,
-		password: req.body.contrasena
+		email: req.body.email,
+		name: req.body.name,
+		user: req.body.user,
+		password: req.body.password
 	})
 	//console.log(req.body); //Mostrar mediante consola lo que se que está enviando por parámetro en el middleware
 	USER.findOneByEmailOrUser(user.email, user.user, (err, foundUser) => {
@@ -22,7 +22,7 @@ function signUp(req, res){
 }
 
 function signIn(req, res){
-	USER.findOneByEmailOrUser(req.body.id, req.body.id, (err, user) => {
+	USER.findOneByEmailOrUser(req.body.email, req.body.email, (err, user) => {
 		if(err) return res.status(500).send({message: err})
 		if(user.length == 0) return res.status(404).send({message: `The user does not exist`})
 		BCRYPT.compare(req.body.contrasena, user[0].password, (err, result) => {			
@@ -44,15 +44,15 @@ function signIn(req, res){
 
 function updateUser(req, res){
 	let current = {
-		name: req.body.nombre,
-		address: req.body.direccion,
-		phone: req.body.telefono,
-		country: req.body.pais,
-		gender: req.body.genero,
+		name: req.body.name,
+		address: req.body.address,
+		phone: req.body.phone,
+		country: req.body.country,
+		gender: req.body.gender,
 		//password: req.body.contrasena,
 		image: {
-			data: FS.readFileSync(req.files.imagen.path),
-			contentType: req.files.imagen.type
+			data: FS.readFileSync(req.files.image.path),
+			contentType: req.files.image.type
 		}
 	}
 	let idUser = req.user	
