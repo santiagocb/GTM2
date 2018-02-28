@@ -23,7 +23,7 @@ var userSchema = new SCHEMA({
 	password: {type: String},
 	registerDate: {type: Date, default: Date.now()},
 	image: {data: Buffer, contentType: String},
-	lastLogin: Date			//Aún no implementado
+	lastLogin: {type: Date, default: Date.now()}
 })
 
 userSchema.pre('save', function(next){ //Algoritmo para codificar la contraseña antes de ser guardada
@@ -45,7 +45,7 @@ userSchema.statics.findOneByEmailOrUser = function(email, user, callback) {
 }
 
 userSchema.statics.findByUser = function(user, callback) {
-	return this.find({ user: new RegExp(user, 'i') }, '-_id -__v -password -registerDate', callback);
+	this.find({user: user}, '-_id -__v -password -registerDate', callback);
 }
 
 module.exports = MONGOOSE.model('User', userSchema)

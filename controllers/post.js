@@ -14,8 +14,8 @@ function createPost (req, res){
 		post.image.contentType = req.files.image.type
 
 	post.save((err, postStored) => {
-		if (err) res.status(500).send({message: `Error generating the post`})
-		res.status(201).send({message:'Post created successfully'})
+		if (err) return res.status(500).send({message: `Error generating the post`})
+		return res.status(201).send({message:'Post created successfully'})
  	})
 }
 
@@ -39,7 +39,7 @@ function getAllPosts (req, res){		//Es una solución no óptima
 				element.publisher = poster.user
 				index++;
 				if(index === numberProcessed){
-					res.status(200).send(posts)
+					return res.status(200).send(posts)
 				}		
 				//console.log({poster: poster.name, pub: element.publisher});
 			})
@@ -58,7 +58,7 @@ function getMyPosts (req, res){
 			}
 		}
 		if(!posts.length) return res.status(200).send({message: 'There are not posts'})
-		res.status(200).send(posts)
+		return res.status(200).send(posts)
 	})
 }
 
@@ -67,8 +67,7 @@ function getPost(req, res){
 	POST.find({_id : idPost}, (err, post) => {
 		if(err) return res.status(500).send({message: `Error executing the request: ${err}`})
 		if(!post) return res.status(404).send('The post does not exist')
-
-		res.status(200).send({post})
+		return res.status(200).send({post})
 	})
 }
 

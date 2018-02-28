@@ -14,7 +14,7 @@ function signUp(req, res){
 	USER.findOneByEmailOrUser(user.email, user.user, (err, foundUser) => {
 		if(foundUser.length != 0) return res.status(409).send({message: 'Error creating the user: The unique field has already taken'})
 		user.save((err) => {
-			if (err) res.status(500).send({message: `Error creating the user: ${err}`})
+			if (err) return res.status(500).send({message: `Error creating the user: ${err}`})
 			return res.status(201).send({message: 'The user has been signed up successfully'})
 	 	})
 	})
@@ -22,10 +22,11 @@ function signUp(req, res){
 
 function signIn(req, res){
 	USER.findOneByEmailOrUser(req.body.email, req.body.email, (err, user) => {
-		if(err) return res.status(500).send({message: err})
-		if(user.length == 0) return res.status(404).send({message: `The user does not exist`})
+		if(err) return res.status(500).send({message: err})		
+		if(!user.length) return res.status(404).send({message: `The user does not exist`})
 		BCRYPT.compare(req.body.password, user[0].password, (err, result) => {			
 			if(result)	{
+				USER.findByIdAndUpdate(user[0]._id, {lastLogin: Date.now()}).then()
 				var token = SERVICE.createToken(user[0])
 				res.status(200).send({
 					success: true,
@@ -55,16 +56,17 @@ function updateUser(req, res){
 	}
 	let idUser = req.user	
 	USER.findByIdAndUpdate(idUser, current, (err, userUpdated) => {		
-		if(err) res.status(500).send({message: `Error updating the user information`})
-		res.status(200).send({message: 'User information updated successfully'})
+		if(err) return res.status(500).send({message: `Error updating the user information`})
+		return res.status(200).send({message: 'User information updated successfully'})
 	})
 }
 
 function viewUser(req, res) {
-	let userNick = req.params.nickname;
-	USER.findByUser(userNick, (err, foundUser) => {
-		if(err) res.status(500).send({message: 'Server error'})
-		res.status(200).send(foundUser)
+	let nickUser = req.params.nickname;
+	USER.findByUser(nickUser, (err, foundUser) => {
+		if(err) return res.status(500).send({message: 'Server error'})
+		if(!foundUser.length) return res.status(404).send({message: 'User not found'})
+		return res.status(200).send(foundUser)
 	})
 }
 
