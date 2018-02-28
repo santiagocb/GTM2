@@ -1,7 +1,7 @@
 {
   "name": "gtm",
   "version": "1.0.0",
-  "description": "Aplicacion web para regalos, tradeos y eventos",
+  "description": "Web application for gifts, trades, meets and more",
   "main": "server.js",
   "scripts": {
     "start": "nodemon server.js",
@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://gitlab.com/santiagocb/GTM.git"
+    "url": "git+https://gitlab.com/santiagocb/GTM2.git"
   },
   "author": "hippie team",
   "license": "ISC",
   "bugs": {
-    "url": "https://gitlab.com/santiagocb/GTM/issues"
+    "url": "https://gitlab.com/santiagocb/GTM2/issues"
   },
-  "homepage": "https://gitlab.com/santiagocb/GTM#README",
+  "homepage": "https://gitlab.com/santiagocb/GTM2#README",
   "dependencies": {
     "angular": "^1.6.4",
     "angular-ui-router": "^1.0.0-beta.1",
