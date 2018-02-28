@@ -11,7 +11,6 @@ function signUp(req, res){
 		user: req.body.user,
 		password: req.body.password
 	})
-	//console.log(req.body); //Mostrar mediante consola lo que se que está enviando por parámetro en el middleware
 	USER.findOneByEmailOrUser(user.email, user.user, (err, foundUser) => {
 		if(foundUser.length != 0) return res.status(409).send({message: 'Error creating the user: The unique field has already taken'})
 		user.save((err) => {
@@ -25,16 +24,15 @@ function signIn(req, res){
 	USER.findOneByEmailOrUser(req.body.email, req.body.email, (err, user) => {
 		if(err) return res.status(500).send({message: err})
 		if(user.length == 0) return res.status(404).send({message: `The user does not exist`})
-		BCRYPT.compare(req.body.contrasena, user[0].password, (err, result) => {			
-				if(result)	{
-					var token = SERVICE.createToken(user[0])
-					res.status(200).send({
-						success: true,
-						message: 'Signed in correctly',
-						token: token,
-						name: user[0].name
-				})
-			}
+		BCRYPT.compare(req.body.password, user[0].password, (err, result) => {			
+			if(result)	{
+				var token = SERVICE.createToken(user[0])
+				res.status(200).send({
+					success: true,
+					message: 'Signed in correctly',
+					token: token,
+					name: user[0].name
+			})}
 			else { 
 				return res.status(422).send({message: `The password does not match`}) 
 			}
@@ -62,8 +60,17 @@ function updateUser(req, res){
 	})
 }
 
+function viewUser(req, res) {
+	let userNick = req.params.nickname;
+	USER.findByUser(userNick, (err, foundUser) => {
+		if(err) res.status(500).send({message: 'Server error'})
+		res.status(200).send(foundUser)
+	})
+}
+
 module.exports = {
 	signUp,
 	signIn,
-	updateUser
+	updateUser,
+	viewUser
 }

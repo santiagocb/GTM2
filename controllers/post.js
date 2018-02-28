@@ -20,7 +20,7 @@ function createPost (req, res){
 }
 
 function getAllPosts (req, res){		//Es una solución no óptima
-	POST.find({}).sort({publicationDate: 'asc'}).exec(function(err, posts) {
+	POST.find({}, ['-__v', '-expirationDate'], {publicationDate: 1}, function(err, posts) {
 		var index = 0;
 		var numberProcessed = posts.length * 2
 		if(err) return res.status(500).send({message: `Error executing the request: ${err}`})

@@ -44,5 +44,8 @@ userSchema.statics.findOneByEmailOrUser = function(email, user, callback) {
 	this.find({$or:[{email: email}, {user: user}]}, callback)
 }
 
+userSchema.statics.findByUser = function(user, callback) {
+	return this.find({ user: new RegExp(user, 'i') }, '-_id -__v -password -registerDate', callback);
+}
 
 module.exports = MONGOOSE.model('User', userSchema)

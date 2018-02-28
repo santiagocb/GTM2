@@ -27,6 +27,8 @@ GTM.post('/signup', userController.signUp)
 GTM.post('/signin', userController.signIn)
 //endpoint para modificar perfil
 GTM.put('/profile', AUTH, userController.updateUser)
+//endpoint para ver perfil de un usuario
+GTM.get('/:nickname', AUTH, userController.viewUser)
 
 
 //endpoint para solicitud
