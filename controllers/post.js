@@ -63,12 +63,14 @@ function getMyPosts (req, res){
 }
 
 function getPost(req, res){
-	let idPost = req.params.id
-	POST.find({_id : idPost}, (err, post) => {
+	let publisher = req.params.nickname
+	let postId = req.params.postid
+	POST.findbyPublisher(postId, '-__v', '-expirationDate', (err, post) => {
 		if(err) return res.status(500).send({message: `Error executing the request: ${err}`})
-		if(!post) return res.status(404).send('The post does not exist')
+		if(!post) return res.status(404).send({message: 'The post does not exist'})
 		return res.status(200).send({post})
 	})
+	//return res.status(200).send(user)
 }
 
 function deletePost (req, res){

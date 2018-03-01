@@ -22,7 +22,7 @@ var postSchema = new SCHEMA({
 })
 
 postSchema.statics.findByPublisher = function(publisher, callback){
-    this.find({publisher: new RegExp(publisher, 'i')}, callback);
+	this.find({publisher: publisher}, callback)
 };
 
 module.exports = MONGOOSE.model('Post', postSchema)
