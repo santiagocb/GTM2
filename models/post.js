@@ -15,7 +15,7 @@ var postSchema = new SCHEMA({
 	productName: {type: String},
 	image: {data: Buffer, contentType: String},
 	type: {type: String},
-	publisher: {type: String},
+	publisher: {type: SCHEMA.Types.ObjectId, ref: 'User'},
 	request: {type: Number, default: 0},
 	publicationDate: {type: Date, default: Date.now},
 	expirationDate: {type: Date, default: new Date(+new Date() + 7*24*60*60*1000)} // Date in one week from now

@@ -10,8 +10,8 @@ function createPost (req, res){
 		post.productName = req.body.productName
 		post.type = req.body.type
 		post.publisher = req.user
-		post.image.data = FS.readFileSync(req.files.image.path)
-		post.image.contentType = req.files.image.type
+		//post.image.data = FS.readFileSync(req.files.image.path)
+		//post.image.contentType = req.files.image.type
 
 	post.save((err, postStored) => {
 		if (err) return res.status(500).send({message: `Error generating the post`})
@@ -19,33 +19,27 @@ function createPost (req, res){
  	})
 }
 
-function getAllPosts (req, res){		//Es una solución no óptima
-	POST.find({}, ['-__v', '-expirationDate'], {publicationDate: 1}, function(err, posts) {
-		var index = 0;
-		var numberProcessed = posts.length * 2
-		if(err) return res.status(500).send({message: `Error executing the request: ${err}`})
-		if(!posts.length) return res.status(404).send({message: 'There are not posts'})
-
-		posts.forEach((element) => {
-			let id = element._id	
-			REQUEST.findByPost(id, function(err, requestArray) {
-				if(err) return res.status(500).send({message: `Error executing the request: ${err}`})							
-				element.request = requestArray.length		
-				index++;		
-			})
-			let idPublisher = element.publisher	
-			USER.findById(idPublisher, function(err, poster) {
-				if(err) return res.status(500).send({message: `Error executing the request: ${err}`})				
-				element.publisher = poster.user
-				index++;
-				if(index === numberProcessed){
-					return res.status(200).send(posts)
-				}		
-				//console.log({poster: poster.name, pub: element.publisher});
-			})
-
-		})		
-	})	
+async function getAllPosts (req, res){
+	try {
+		var data = await POST.find({}, ['-__v', '-expirationDate'], {publicationDate: 1}).populate('publisher')
+		var posts = []
+		data.forEach(element => {
+			var json = {}
+			json.description = element.description
+			json.productName = element.productName
+			json.type = element.type
+			json.request = element.request
+			json._id = element._id
+			json.publicationDate = element.publicationDate
+			json.image = element.image
+			json.publisher = element.publisher.user
+			
+			posts.push(json)		
+		})
+		res.status(200).send(posts)
+	} catch (error) {
+		res.status(500).send({message: 'Server error'})
+	}	
 }
 
 function getMyPosts (req, res){
