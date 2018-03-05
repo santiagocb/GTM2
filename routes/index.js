@@ -13,7 +13,7 @@ GTM.post('/post', AUTH, postController.createPost)
 //endpoint enviar todas las publicaciones
 GTM.get('/', postController.getAllPosts)
 //enpoint para ver todas las publicaciones del usuario en sesion
-GTM.get('/myposts', postController.getMyPosts)
+GTM.get('/myposts', AUTH, postController.getMyPosts)
 //endpoint para las publicaciones hechas por el usuario
 GTM.get('/:nickname/:postid', postController.getPost)
 //endpoint eliminar publicacion

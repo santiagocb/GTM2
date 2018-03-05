@@ -20,7 +20,7 @@ function createPost (req, res){
 
 	post.save((err, postStored) => {
 		if (err) return res.status(500).send({message: `Error generating the post`})
-		return res.status(201).send({message:'Post created successfully', post: postStored})
+		return res.status(201).send({message:'Post created successfully'})
  	})
 }
 
@@ -48,15 +48,9 @@ async function getAllPosts (req, res){
 }
 
 function getMyPosts (req, res){
-	POST.find({}).sort({date: 'asc'}).exec(function(err, posts) {
-		if(err) return res.status(500).send({message: `Error executing the request: ${err}`})		
-		for (i = 0; i < posts.length; i++){				//Método para quitar las publicaciones de otros.
-			if(posts[i].publisher != req.user){
-				posts.splice(i, 1)
-				i--;
-			}
-		}
-		if(!posts.length) return res.status(200).send({message: 'There are not posts'})
+	POST.find({publisher: req.user}, ['-__v', '-publisher'], {publicationDate: 1}, (err, posts) => {
+		if(err) return res.status(500).send({message: `Error executing the request: ${err}`})	
+		if(!posts.length) return res.status(200).send({message: 'You do not have any post'})
 		return res.status(200).send(posts)
 	})
 }
@@ -94,8 +88,6 @@ function updatePost (req, res){
 		res.status(200).send({post: postUpdated})
 	})
 }
-
-
 
 module.exports = {
 	getAllPosts,
