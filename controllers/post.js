@@ -20,7 +20,7 @@ function createPost (req, res){
 
 	post.save((err, postStored) => {
 		if (err) return res.status(500).send({message: `Error generating the post`})
-		return res.status(201).send({message:'Post created successfully', post: postStored})
+		return res.status(201).send({message:'Post created successfully'})
  	})
 }
 
