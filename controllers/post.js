@@ -12,12 +12,12 @@ function createPost (req, res){
 		post.publisher = req.user
 		post.image.path = __dirname + '/../src/' + req.files.image.name
 		post.image.data = FS.readFileSync(req.files.image.path)
-		post.image.contentType = req.files.image.type
+		//post.image.contentType = req.files.image.type
 		FS.writeFile(post.image.path, post.image.data, 'binary', (err,resolve) => {
 			if (err) res.send(err);
 		})
 		console.log(__dirname + '/../' + req.files.image.name);		
-
+		post.image.path = req.files.image.name
 	post.save((err, postStored) => {
 		if (err) return res.status(500).send({message: `Error generating the post`})
 		return res.status(201).send({message:'Post created successfully'})
