@@ -10,6 +10,7 @@ const MULTIPART = require('connect-multiparty')
 
 APP.use(CORS())
 APP.use(MORGAN('dev'))
+APP.use('/gtm', EXPRESS.static('./src'));
 APP.use('/public', EXPRESS.static(__dirname + '/public'));
 APP.use('/node_modules', EXPRESS.static(__dirname + '/node_modules'));
 APP.use(MULTIPART())
