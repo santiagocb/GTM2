@@ -13,7 +13,7 @@ function close() {
 var postSchema = new SCHEMA({
 	description: {type: String},
 	productName: {type: String},
-	image: {path: String, data: Buffer, contentType: String},
+	image: {path: String}, //, data: Buffer, contentType: String
 	type: {type: String},
 	publisher: {type: SCHEMA.Types.ObjectId, ref: 'User'},
 	request: {type: Number, default: 0},
